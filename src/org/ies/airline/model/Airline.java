@@ -29,6 +29,33 @@ public class Airline {
         System.out.println("No existe ese vuelo");
     }
 
+    public void showFlights (){
+        for (Flight flight: flights){
+            System.out.println(flight);
+        }
+    }
+
+    public void showFlightOrigin (String origin){
+        for (Flight flight: flights){
+            if (flight.getOrigin().equals(origin)){
+                System.out.println(flight);
+            }
+        }
+    }
+
+    public void showPassengerSeat (int fligthNumber, String nif){
+        for (Flight flight: flights){
+            if (flight.getFlightNumber() == fligthNumber){
+                for (Passenger passenger: flight.getPassengers()){
+                    if (passenger.getNif().equals(nif)){
+                        System.out.println(passenger);
+                    }
+                }
+            }
+        }
+    }
+
+
     public String getName() {
         return name;
     }

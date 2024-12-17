@@ -21,7 +21,7 @@ public class Passenger {
         System.out.println("Ingrese el numero de asiento al que desea cambiar");
         Integer changeSeatNumber = scanner.nextInt();
         scanner.nextLine();
-        return changeSeatNumber;
+        return seatNumber=changeSeatNumber;
     }
 
     public String getNif() {

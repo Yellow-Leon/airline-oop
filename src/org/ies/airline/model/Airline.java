@@ -13,15 +13,54 @@ public class Airline {
         this.flights = flights;
     }
 
-    public String askNif(){
+    // Metodos propios aqui
+    //Bucle para aerolinea
+    public Flight forFlight() {
+        for (Flight flight : flights) {
+            return flight;
+        }
+        return null;
+    }
+
+    public Passenger forPassenger() {
+        for (Passenger passenger : forFlight().getPassengers()) {
+            return passenger;
+        }
+        return null;
+    }
+
+    //Pregunta NIF - Usado para simplificar en searchFlight y en showPassenger
+    public String askNif() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduzca el nif del pasajero");
         return scanner.nextLine();
     }
 
-    public void searchFlight (int flightNumber){
-        for (Flight flight: flights){
-            if (flightNumber == flight.getFlightNumber()){
+    //Pregunta un numero
+    public Integer askNum() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduce un numero");
+        Integer num = scanner.nextInt();
+        scanner.nextLine();
+        return num;
+    }
+
+    //Muestra un pasajero - Usado en showPassengerFlight
+    public void showPassenger(Flight flight) {
+        for (Passenger passenger : flight.getPassengers()) {
+            if (passenger.getNif().equals(askNif()))
+                System.out.println(passenger);
+        }
+    }
+//---------
+
+
+// Metodo para App1
+
+    // Metodo para buscar un vuelo -- Usa otro metodo ubicado en la clase Passengar
+    public void searchFlight(int flightNumber) {
+        for (Flight flight : flights) {
+            if (flightNumber == flight.getFlightNumber()) {
                 flight.searchPassenger(askNif());
                 break;
             }
@@ -29,31 +68,62 @@ public class Airline {
         System.out.println("No existe ese vuelo");
     }
 
-    public void showFlights (){
-        for (Flight flight: flights){
+//-------
+
+// Metodos para app principal
+
+    // Opcion 1: Metodo para ver todos los vuelos
+    public void showFlights() {
+        for (Flight flight : flights) {
             System.out.println(flight);
         }
     }
 
-    public void showFlightOrigin (String origin){
-        for (Flight flight: flights){
-            if (flight.getOrigin().equals(origin)){
+    // Opcion 2: Metodo para ver todos los vuelos por origen
+    public void showFlightOrigin(String origin) {
+        for (Flight flight : flights) {
+            if (flight.getOrigin().equals(origin)) {
                 System.out.println(flight);
             }
         }
     }
 
-    public void showPassengerSeat (int fligthNumber, String nif){
-        for (Flight flight: flights){
-            if (flight.getFlightNumber() == fligthNumber){
-                for (Passenger passenger: flight.getPassengers()){
-                    if (passenger.getNif().equals(nif)){
-                        System.out.println(passenger);
-                    }
+    // Opcion 3: Metodo para ver el vuelo de un pasajero --- Usa un metodo propio para evitar un cumulo de codigos
+    public void showPassengerFlight(int fligthNumber) {
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber() == fligthNumber) {
+                showPassenger(flight);
+            }
+        }
+    }
+
+    // Opcion 4: Metodo para ver el asiento de un pasajero
+    public void showPassengerSeat(Integer numberSeat) {
+        if (forFlight().getFlightNumber() == askNum()) {
+            if (numberSeat.equals(forPassenger().getSeatNumber())) {
+                if (askNif().equals(forPassenger().getNif())) {
+                    System.out.println("El pasajero se sienta en " + numberSeat);
+                } else {
+                    System.out.println("El pasajero no se encuentra");
+                }
+            }
+        } else {
+            System.out.println("No existe el vuelo");
+        }
+    }
+
+    //Opcion 5: Metodo para cambiar el asiento
+    public void changeSeatFlight (){
+        if (forFlight().getFlightNumber() == askNum()){
+            if (forPassenger().getNif().equals(askNif())){
+                if (forPassenger().getSeatNumber().equals(askNum())){
+                    forPassenger().changeSeatNumber();
                 }
             }
         }
     }
+
+// -----
 
 
     public String getName() {

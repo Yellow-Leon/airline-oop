@@ -16,14 +16,6 @@ public class Passenger {
         this.seatNumber = seatNumber;
     }
 
-    public Integer changeSeatNumber() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el numero de asiento al que desea cambiar");
-        Integer changeSeatNumber = scanner.nextInt();
-        scanner.nextLine();
-        return seatNumber=changeSeatNumber;
-    }
-
     public String getNif() {
         return nif;
     }

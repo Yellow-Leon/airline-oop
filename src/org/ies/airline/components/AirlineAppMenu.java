@@ -13,9 +13,9 @@ public class AirlineAppMenu {
         this.airlineReader = airlineReader;
     }
 
-    public void menu() {
-        System.out.println("Introduzca los datos de la aerolinea");
-        Airline airline = airlineReader.reader();
+    public void menu(Airline airline) {
+//        System.out.println("Introduzca los datos de la aerolinea");
+//        Airline airline = airlineReader.reader();
         int option;
         do {
             System.out.println("---- " + airline.getName() + " ----");
@@ -29,17 +29,15 @@ public class AirlineAppMenu {
             option = scanner.nextInt();
             scanner.nextLine();
             if (option == 1){
-                airline.showFlights();
+                airline.showAllFlights();
             } else if (option == 2) {
                 System.out.println("Introduzca el origen del vuelo");
                 String origin = scanner.nextLine();
-                airline.showFlightOrigin(origin);
+
             }else if (option == 3){
-                airline.showPassengerFlight(airline.askNum());
+                airline.showThisPassengerFlight(airline.askNif());
             }else if (option == 4){
-                airline.showPassengerSeat(airline.askNum());
             }else if (option == 5){
-                airline.changeSeatFlight();
             }else if (option == 6){
                 System.out.println("Saliendo....");
             } else {

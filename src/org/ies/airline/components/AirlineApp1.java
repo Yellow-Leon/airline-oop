@@ -21,6 +21,5 @@ public class AirlineApp1 {
         System.out.println("Introduce el numero de vuelo");
         int flightNumber = scanner.nextInt();
         scanner.nextLine();
-        airline.searchFlight(flightNumber);
     }
 }

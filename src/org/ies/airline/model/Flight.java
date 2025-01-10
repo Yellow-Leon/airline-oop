@@ -19,20 +19,6 @@ public class Flight {
         this.passengers = passengers;
     }
 
-    public void searchPassenger(String nif) {
-        boolean checkpoint = true;
-        for (Passenger passenger : passengers) {
-            if (passenger.getNif().equals(nif)) {
-                System.out.println(passenger);
-                passenger.setSeatNumber(passenger.changeSeatNumber());
-
-            }
-        }
-        if (!checkpoint) {
-            System.out.println("No existe el pasajero");
-        }
-    }
-
     public int getFlightNumber() {
         return flightNumber;
     }
